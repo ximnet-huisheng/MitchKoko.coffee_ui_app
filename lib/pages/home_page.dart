@@ -1,5 +1,6 @@
 import 'dart:html';
 
+import 'package:coffee_ui_app/util/coffee_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -70,9 +71,39 @@ class _HomePageState extends State<HomePage> {
           ),
 
           //search bar
-          const TextField(),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25.0),
+            child: TextField(
+              decoration: InputDecoration(
+                prefixIcon: const Icon(Icons.search),
+                hintText: "Find your coffee...",
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.grey.shade600,
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.grey.shade600,
+                  ),
+                ),
+              ),
+            ),
+          ),
 
           //horizontal listview of coffee tiles
+          const SizedBox(
+            height: 25,
+          ),
+
+          Expanded(
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: [
+                CoffeeTile(),
+              ],
+            ),
+          )
         ],
       ),
     );
