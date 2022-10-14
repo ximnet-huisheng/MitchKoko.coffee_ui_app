@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
 
 class CoffeeTile extends StatelessWidget {
-  const CoffeeTile({super.key});
+  final String coffeeImagePath;
+  final String coffeeName;
+  final String coffeePrice;
+  const CoffeeTile({
+    super.key,
+    required this.coffeeImagePath,
+    required this.coffeeName,
+    required this.coffeePrice,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 25.0, bottom: 25),
       child: Container(
-        padding: EdgeInsets.all(12),
+        padding: const EdgeInsets.all(12),
         width: 200,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
@@ -23,7 +31,7 @@ class CoffeeTile extends StatelessWidget {
                 12,
               ),
               child: Image.asset(
-                'lib/images/coffee.jpg',
+                coffeeImagePath,
               ),
             ),
 
@@ -36,9 +44,9 @@ class CoffeeTile extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    "Latte",
-                    style: TextStyle(
+                  Text(
+                    coffeeName,
+                    style: const TextStyle(
                       fontSize: 20,
                     ),
                   ),
@@ -49,12 +57,26 @@ class CoffeeTile extends StatelessWidget {
                 ],
               ),
             ),
-            Row(
-              children: [
-                Text(
-                  '\$4.00',
-                )
-              ],
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    '\$$coffeePrice',
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(4),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4),
+                      color: Colors.orange,
+                    ),
+                    child: const Icon(
+                      Icons.add,
+                    ),
+                  ),
+                ],
+              ),
             )
           ],
         ),

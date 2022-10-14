@@ -1,6 +1,7 @@
 import 'dart:html';
 
 import 'package:coffee_ui_app/util/coffee_tile.dart';
+import 'package:coffee_ui_app/util/coffee_types.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -12,6 +13,24 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final List coffeeType = [
+    // [coffee type, isSelected]
+    ['capucinno', true],
+    ['latte', false],
+    ['black', false]
+  ];
+
+  void coffeeTypeSelected(int index) {
+    setState(() {
+//this for loop make all false
+      for (int i = 0; i < coffeeType.length; i++) {
+        coffeeType[i][1] = false;
+      }
+
+      coffeeType[index][1] = true;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -91,16 +110,48 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
 
-          //horizontal listview of coffee tiles
           const SizedBox(
             height: 25,
           ),
 
+//horizontal listview of coffee types
+          SizedBox(
+            height: 50,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: coffeeType.length,
+              itemBuilder: (context, index) {
+                return CoffeeTypes(
+                  coffeeType: coffeeType[index][0],
+                  isSelected: coffeeType[index][1],
+                  onTap: () {
+                    coffeeTypeSelected(
+                      index,
+                    );
+                  },
+                );
+              },
+            ),
+          ),
+
+//horizontal listview of coffee tiles
+
           Expanded(
             child: ListView(
               scrollDirection: Axis.horizontal,
-              children: [
-                CoffeeTile(),
+              children: const [
+                CoffeeTile(
+                    coffeeImagePath: "lib/images/coffee.jpg",
+                    coffeeName: "coffee",
+                    coffeePrice: "4.00"),
+                CoffeeTile(
+                    coffeeImagePath: "lib/images/barista.jpg",
+                    coffeeName: "espresso",
+                    coffeePrice: "5.00"),
+                CoffeeTile(
+                    coffeeImagePath: "lib/images/capucino.jpg",
+                    coffeeName: "capucine",
+                    coffeePrice: "6.00"),
               ],
             ),
           )
